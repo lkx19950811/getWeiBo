@@ -62,9 +62,11 @@ def get_data(uid="3303658163", containerid="1005053303658163"):
                     text = re.sub(pattern, "", new_text)
                     content.append(text)
         if len(content) == last_length:
+            # 重试次数大于3时 放弃重试
             if try_time >= 3:
                 print("已经获取不到更多内容，脚本暂停处理")
                 break
+            # 休息5秒
             time.sleep(5)
             try_time += 1
             # 替换新的 浏览器标识
@@ -73,7 +75,7 @@ def get_data(uid="3303658163", containerid="1005053303658163"):
             print ("正在尝试重新获取")
 
         else:
-            # 每次成功抓取内容充值重试次数
+            # 每次成功抓取内容 重置重试次数
             try_time = 0
             last_length = len(content)
             print("抓取第{page}页，目前总共抓取了 {count} 条微博".format(page=page, count=len(content)))
