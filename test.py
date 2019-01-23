@@ -43,7 +43,7 @@ def get_data(uid="3303658163", containerid="1005053303658163"):
         params['value'] = uid
         params['containerid'] = str(containerid)
         # 请求接口
-        res = requests.get(url, headers=headers, params=params)
+        res = requests.get(url, headers=headers, params=params, verify=False)
         # 如果接口返回不为空才返回下一步
         if res.content != "":
             print(res.json().get("data"))
